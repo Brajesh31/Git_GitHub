@@ -1,0 +1,676 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Git and GitHub</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a3224671-95d9-4d57-a833-c1f55d725fea" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/git_pink.svg"/></div><h1 class="page-title">Git and GitHub</h1><p class="page-description"></p></header><div class="page-body"><p id="bd101db9-bc1b-4d00-8107-9e032717d2d6" class="">Git and GitHub are essential tools in modern software development, enabling version control and collaboration among developers.</p><h1 id="6b988a7e-3f53-4f23-9e38-7c931969fb38" class="">Git</h1><h3 id="427e1e63-0c69-4e8a-b871-1a4cf9ef5fea" class="">Version Control System:</h3><p id="10aba511-0baf-4d5c-9c26-055ae50107e6" class="">Git is a distributed version control system (DVCS) that helps track changes in source code during software development.</p><h3 id="8b26cb67-6e1a-49ed-8082-a50148d50860" class="">Concepts of Git:</h3><ul id="51721c53-83d4-40e0-a665-b88d8cec6171" class="bulleted-list"><li style="list-style-type:disc"><strong>Repository (Repo):</strong> A storage location for a project&#x27;s files and revision history.</li></ul><ul id="8903dbdc-a0cc-4308-8a5f-1aeaa569b8af" class="bulleted-list"><li style="list-style-type:disc"><strong>Clone:</strong> Copying a repository to create a local copy on your machine.</li></ul><ul id="f68fb41a-4a59-4b01-992b-d0fc65b3702b" class="bulleted-list"><li style="list-style-type:disc"><strong>Commit:</strong> A snapshot of changes made to the code.</li></ul><ul id="063cd106-2b3c-4423-9a19-2675f587b8af" class="bulleted-list"><li style="list-style-type:disc"><strong>Branch:</strong> A separate line of development that allows changes to be made without affecting the main codebase.</li></ul><ul id="8949f132-125d-4e48-9f23-2c46b679075e" class="bulleted-list"><li style="list-style-type:disc"><strong>Merge:</strong> Combining changes from one branch into another.</li></ul><ul id="acfcfc7c-37c9-41b6-9f34-49689b4b3192" class="bulleted-list"><li style="list-style-type:disc"><strong>Pull:</strong> Fetching changes from a remote repository to update the local copy.</li></ul><ul id="11414218-1126-4bd1-aa9d-40a52acae8e6" class="bulleted-list"><li style="list-style-type:disc"><strong>Push:</strong> Uploading local changes to a remote repository.</li></ul><h1 id="dce23aee-5651-4319-92ed-37d4e4971155" class="">Git Commands:</h1><h2 id="0b9d3018-1233-4a73-9a29-5005da7b15f2" class="">SETUP</h2><p id="47d1c0ef-1e6d-4e33-a8e6-6d7c3b8eff76" class="">Configuring user information used across all local repositories</p><ul id="d0881753-b746-4f87-b111-c715f8fe075e" class="bulleted-list"><li style="list-style-type:disc">Define the author name to be used for all commits by the current user.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7d5a7c50-3fae-4ca7-acbd-3856ade7ab74" class="code"><code class="language-JavaScript">git config --global user.name &lt;Username&gt;</code></pre></li></ul><ul id="4db13b2d-db1c-4467-b398-367eef939800" class="bulleted-list"><li style="list-style-type:disc">Define the author email to be used for all commits by the current user.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="620eb1c9-876d-40d8-b757-3ef1dc07e41f" class="code"><code class="language-JavaScript">git config --global user.email &lt;User_email&gt;</code></pre></li></ul><h2 id="26ca00b3-d082-4e89-ad3c-d2fd7cdf6bb5" class="">SETUP &amp; INIT</h2><p id="7b05af59-4df4-4ee8-aa0d-f707295c8468" class="">Configuring user information, initializing and cloning repositories</p><ul id="eaf4b0fd-6f4d-4898-8894-0fa6a8e757cb" class="bulleted-list"><li style="list-style-type:disc">initialize an existing directory as a Git repository<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="528b19c6-b545-40c6-8e1e-52b4a6d57dd7" class="code"><code class="language-JavaScript">git init</code></pre></li></ul><ul id="d5ecf93c-98f9-42c2-b62e-8be8b97ebd19" class="bulleted-list"><li style="list-style-type:disc">retrieve an entire repository from a hosted location via URL<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0da0ba77-b0c3-414f-b0ad-fb06c778f8e5" class="code"><code class="language-JavaScript">git clone &lt;Url&gt;</code></pre></li></ul><h2 id="16cfdd0a-2181-42e7-a50a-7de64af4ef44" class="">STAGE &amp; SNAPSHOT</h2><p id="2079ab85-f57c-45cb-ace3-0a4d23654ec0" class="">Working with snapshots and the Git staging area</p><ul id="468ef526-2666-4fde-a617-df91badf20b2" class="bulleted-list"><li style="list-style-type:disc">List which files are staged, un staged, and untracked.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d57d1c85-ab00-4faa-9f14-638c2b1f0fd7" class="code"><code class="language-JavaScript">git status</code></pre></li></ul><ul id="60441741-c018-4a38-b835-2990bf9263fc" class="bulleted-list"><li style="list-style-type:disc">Add a file as it looks now to your next commit (stage)<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="bac9aa7f-35fa-4f5e-b2c4-46cdacff44b6" class="code"><code class="language-JavaScript">git add &lt;file&gt;</code></pre></li></ul><ul id="dd424269-d624-4ae4-81e5-98feea87fb69" class="bulleted-list"><li style="list-style-type:disc">Remove &lt;file&gt; from the staging area, but leave the working directory unchanged. This unstages a file without overwriting any changes<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0e250f21-cdb2-44e4-85f9-73d1dcf504d0" class="code"><code class="language-JavaScript">git reset &lt;file&gt;</code></pre></li></ul><ul id="a6a7d7e4-0f5c-47d4-aa7d-2e610084be80" class="bulleted-list"><li style="list-style-type:disc">Show un staged changes between your index and working directory.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="634cb76b-4f11-4edc-bbc8-0f7beb5e7a49" class="code"><code class="language-JavaScript">git diff</code></pre></li></ul><ul id="16c7f99d-fdc2-419a-b708-e5c6e2165413" class="bulleted-list"><li style="list-style-type:disc">diff of what is staged but not yet committed<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="bde4c300-08a0-47c5-a76e-32daaff89c66" class="code"><code class="language-JavaScript">git diff --staged</code></pre></li></ul><ul id="e7361fd4-5991-4429-bf97-e679b0f58b7b" class="bulleted-list"><li style="list-style-type:disc">Commit the staged snapshot, but instead of launching a text editor, use &lt;descriptive_message&gt; as the commit message<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b6951f07-11dc-4f40-a571-dfcbca141fe6" class="code"><code class="language-JavaScript">git commit -m &lt;descriptive_message&gt;</code></pre></li></ul><h2 id="0c54795f-f6b7-46f0-b88e-83bb28d863f7" class="">BRANCH &amp; MERGE</h2><p id="330ffcee-5b4d-493a-b436-5d4dd9c9fc3f" class="">Isolating work in branches, changing context, and integrating changes</p><ul id="1a3c47af-5b20-4fd5-a380-11945dafbe84" class="bulleted-list"><li style="list-style-type:disc">list your branches. a * will appear next to the currently active branch<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="06c96747-6c30-4d86-88af-d93de2727570" class="code"><code class="language-JavaScript">git branch</code></pre></li></ul><ul id="f032e08b-2d79-47af-808b-1a2b7ead6c1a" class="bulleted-list"><li style="list-style-type:disc">create a new branch at the current commit<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="37dfd01a-b8b0-49ae-96a8-f7b685554078" class="code"><code class="language-JavaScript">git branch &lt;branch_name&gt;</code></pre></li></ul><ul id="d4abb062-4c3c-4522-985a-5807265eff5b" class="bulleted-list"><li style="list-style-type:disc">switch to another branch and check it out into your working directory<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="3cdc7fd2-fa47-4810-9d40-4b598a4cce85" class="code"><code class="language-JavaScript">git checkout</code></pre></li></ul><ul id="73df4b51-17d7-409c-b8f3-b18f96324a76" class="bulleted-list"><li style="list-style-type:disc">merge the specified branch’s history into the current one<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="8aa5c961-6734-42d0-8841-1b083f157e6b" class="code"><code class="language-JavaScript">git merge &lt;branch&gt;</code></pre></li></ul><ul id="25a7f1e6-8594-4552-bb55-21355d71ed44" class="bulleted-list"><li style="list-style-type:disc">Display the entire commit history using the default format. For customization see additional options.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="621b6378-c0a7-455d-9617-2d1ab707396a" class="code"><code class="language-JavaScript">git log</code></pre></li></ul><h2 id="dcea9cff-c9df-4c8c-9801-cde1542b3e04" class="">REMOTE REPOSITORIES</h2><p id="ae73a5db-d6c8-43dc-86db-cfe6a9ab1c5f" class="">Retrieving updates from another repository and updating local repos</p><ul id="0a0669df-6b6c-46ec-a0b7-d4a360384b6e" class="bulleted-list"><li style="list-style-type:disc">Create a new connection to a remote repo. After adding a remote, you can use &lt;name&gt; as a shortcut for &lt;url&gt; in other commands.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b99c960a-e651-44ba-a014-1bcfb75e98ff" class="code"><code class="language-JavaScript">git remote add &lt;name&gt; &lt;url&gt;</code></pre></li></ul><ul id="82c234cd-8085-47c4-be91-3607c52701d8" class="bulleted-list"><li style="list-style-type:disc">fetch down all the branches from that Git remote<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="edc0631d-90f0-4b70-b4af-7f21f525cde5" class="code"><code class="language-JavaScript">git fetch &lt;name&gt;</code></pre></li></ul><ul id="8150e0eb-5b4f-4fb6-9ea2-d47c781e4313" class="bulleted-list"><li style="list-style-type:disc">merge a remote branch into your current branch to bring it up to date<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="00d5666c-7fd3-45da-9d2b-2b2b015e15cd" class="code"><code class="language-JavaScript">git merge &lt;name&gt;/&lt;branch&gt;</code></pre></li></ul><ul id="e5790455-d87e-4e38-9a60-d3a3a3f346d1" class="bulleted-list"><li style="list-style-type:disc">Transmit local branch commits to the remote repository branch<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a89a657f-0960-49b0-893d-1f90de2a9ae0" class="code"><code class="language-JavaScript">git push &lt;name&gt; &lt;branch&gt;</code></pre></li></ul><ul id="e2c80775-e8c1-4fde-b026-de372c316d79" class="bulleted-list"><li style="list-style-type:disc">fetch and merge any commits from the tracking remote branch<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="6aa1d225-60be-4139-bb1a-dd044d28952b" class="code"><code class="language-JavaScript">git pull</code></pre></li></ul><h1 id="46234e26-bc21-48b1-875e-4cb2c05969e1" class="">GitHub</h1><p id="4ca711a4-a76e-439f-aecc-73339ba888b8" class="">GitHub is a web-based platform that provides hosting for Git repositories and additional Collaboration features.</p><h3 id="acbaa0e6-ce1b-4cdc-9f1b-369e57030009" class="">Collaboration in GitHub:</h3><ul id="04c8174a-57e2-4b21-8ea4-a30e5e16cf2a" class="bulleted-list"><li style="list-style-type:disc"><strong>Pull Requests (PRs):</strong><ul id="82070773-9623-488d-b7e9-1b0d54ecd6ba" class="bulleted-list"><li style="list-style-type:circle">Proposed changes to a repository submitted by a developer for review before being merged.</li></ul></li></ul><ul id="aa673720-c06e-458e-9fe3-7138f0d8cd9e" class="bulleted-list"><li style="list-style-type:disc"><strong>Issues:</strong><ul id="6e5028f9-b391-4287-b6fb-414f1a59de1f" class="bulleted-list"><li style="list-style-type:circle">Track tasks, enhancements, bugs, and other kinds of questions.</li></ul></li></ul><ul id="b58d8cca-0720-4a2f-990a-fe1f0cbc25a0" class="bulleted-list"><li style="list-style-type:disc"><strong>Forks:</strong><ul id="85004860-de1d-4bc6-8d91-cfb96a3fe9a1" class="bulleted-list"><li style="list-style-type:circle">Personal copies of another user&#x27;s repository for making changes without affecting the original project.</li></ul></li></ul><h3 id="7ce1e8d8-c184-4dac-bdf4-624e735a5380" class="">Workflow:</h3><ul id="db8014e5-4f07-4925-b5b9-1ddd995cc1ba" class="bulleted-list"><li style="list-style-type:disc"><strong>Forking a Repository:</strong><ul id="95d9cac6-8add-417a-96b9-50d2308783c4" class="bulleted-list"><li style="list-style-type:circle">Create a personal copy of someone else&#x27;s project.</li></ul></li></ul><ul id="eb04222a-2d09-4daa-b501-7e81b7f1aaa6" class="bulleted-list"><li style="list-style-type:disc"><strong>Cloning:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24551d44-9b3d-4993-bd8f-cb420589f979" class="code code-wrap"><code class="language-JavaScript">git clone &lt;repository_url&gt;</code></pre></li></ul><ul id="b9dc033e-662a-4a77-8c9e-d011ee3fb90a" class="bulleted-list"><li style="list-style-type:disc"><strong>Branching, Committing, and Pushing:</strong><ul id="9a615515-81b8-448a-bedd-f49dea7e58b8" class="bulleted-list"><li style="list-style-type:circle">Similar to the Git workflow on your local machine.</li></ul></li></ul><ul id="274228cc-e5b0-45f5-b73d-d7d038c326d1" class="bulleted-list"><li style="list-style-type:disc"><strong>Pull Request:</strong><ul id="90edfbdc-39ea-4cc8-9739-812aa0f09dae" class="bulleted-list"><li style="list-style-type:circle">Submit changes for review and merge.</li></ul></li></ul><ul id="37469b63-7768-4c07-9228-dc24fabcf10d" class="bulleted-list"><li style="list-style-type:disc"><strong>Merging Pull Request:</strong><ul id="e312c0ac-6912-499d-8b21-64e0ca64e7ba" class="bulleted-list"><li style="list-style-type:circle">Once changes are approved, they can be merged into the main repository.</li></ul></li></ul><p id="26102585-9a91-40f3-80c4-3b954ae9068f" class="">GitHub provides a user-friendly interface for Git operations and enhances collaboration in a team setting. Many open-source projects and organizations use GitHub as a platform for hosting and managing their repositories.</p><h2 id="61a93a15-d5b7-4b4a-8971-f8619e16826b" class="">Differences between Git and GitHub</h2><table id="f9ffb3a4-2e07-4aaa-b460-6c34844ede2b" class="simple-table"><tbody><tr id="c98707c8-bf1d-4e53-9ea9-a284d5d9507b"><td id="j@&gt;M" class="" style="width:162.98843383789062px">Feature</td><td id="WqCP" class="" style="width:283.72454833984375px">Git</td><td id="POuH" class="" style="width:334.97222900390625px">GitHub</td></tr><tr id="922a49ec-88f4-40b1-b381-3354221f7370"><td id="j@&gt;M" class="" style="width:162.98843383789062px"><strong>Definition</strong></td><td id="WqCP" class="" style="width:283.72454833984375px">Distributed Version Control System (DVCS)</td><td id="POuH" class="" style="width:334.97222900390625px">Web-based platform for hosting Git repositories</td></tr><tr id="7d8c7e91-d47a-48bb-a729-e77a93a213c3"><td id="j@&gt;M" class="" style="width:162.98843383789062px"><strong>Type</strong></td><td id="WqCP" class="" style="width:283.72454833984375px">Software installed locally</td><td id="POuH" class="" style="width:334.97222900390625px">Web-based service</td></tr><tr id="58eafefb-835a-45cd-a860-18fd59d1dc70"><td id="j@&gt;M" class="" style="width:162.98843383789062px"><strong>Functionality</strong></td><td id="WqCP" class="" style="width:283.72454833984375px">Manages version control locally</td><td id="POuH" class="" style="width:334.97222900390625px">Adds collaboration features, remote hosting</td></tr><tr id="46879e89-7336-4f31-aa71-b8b4689b44e3"><td id="j@&gt;M" class="" style="width:162.98843383789062px"><strong>Repository Hosting</strong></td><td id="WqCP" class="" style="width:283.72454833984375px">Local machine</td><td id="POuH" class="" style="width:334.97222900390625px">GitHub servers</td></tr><tr id="5c9331bb-8b54-472a-955f-8be0fa0e1ef5"><td id="j@&gt;M" class="" style="width:162.98843383789062px"><strong>Collaboration</strong></td><td id="WqCP" class="" style="width:283.72454833984375px">Limited (local team)</td><td id="POuH" class="" style="width:334.97222900390625px">Extensive (global collaboration)</td></tr><tr id="d99e54bc-59a5-426b-84e1-f833406a2f10"><td id="j@&gt;M" class="" style="width:162.98843383789062px"><strong>Remote Repositories</strong></td><td id="WqCP" class="" style="width:283.72454833984375px">Can be hosted on any server</td><td id="POuH" class="" style="width:334.97222900390625px">Hosted on GitHub servers</td></tr><tr id="5be319ce-0d6d-4d06-baf1-1b69060e31d4"><td id="j@&gt;M" class="" style="width:162.98843383789062px"><strong>Graphical Interface</strong></td><td id="WqCP" class="" style="width:283.72454833984375px">Command-line</td><td id="POuH" class="" style="width:334.97222900390625px">Web-based with a graphical interface</td></tr><tr id="37db2e58-8494-4e52-bc5f-3fd7eca10968"><td id="j@&gt;M" class="" style="width:162.98843383789062px"><strong>Pull Requests</strong></td><td id="WqCP" class="" style="width:283.72454833984375px">Not applicable</td><td id="POuH" class="" style="width:334.97222900390625px">Facilitates code review and collaboration</td></tr><tr id="29d95839-2794-4ca7-8d96-bf5e9d8711f8"><td id="j@&gt;M" class="" style="width:162.98843383789062px"><strong>Issues and Tracking</strong></td><td id="WqCP" class="" style="width:283.72454833984375px">Not applicable</td><td id="POuH" class="" style="width:334.97222900390625px">Integrated issue tracking system</td></tr><tr id="f4e2a9ab-92b2-4a52-ae6c-9f83dce1ea95"><td id="j@&gt;M" class="" style="width:162.98843383789062px"><strong>Forking</strong></td><td id="WqCP" class="" style="width:283.72454833984375px">Not applicable</td><td id="POuH" class="" style="width:334.97222900390625px">Allows users to create personal copies (forks)</td></tr><tr id="12053ef8-7976-42ab-8e3a-7b17ebec3103"><td id="j@&gt;M" class="" style="width:162.98843383789062px"><strong>User Management</strong></td><td id="WqCP" class="" style="width:283.72454833984375px">Not applicable</td><td id="POuH" class="" style="width:334.97222900390625px">User permissions, teams, and organization</td></tr><tr id="afe9340f-173b-4b05-bf73-ca95aa46f2fa"><td id="j@&gt;M" class="" style="width:162.98843383789062px"><strong>Visibility</strong></td><td id="WqCP" class="" style="width:283.72454833984375px">Limited to local machine</td><td id="POuH" class="" style="width:334.97222900390625px">Public and private repositories</td></tr><tr id="94609815-3715-4f76-82b8-1db7f0d246a3"><td id="j@&gt;M" class="" style="width:162.98843383789062px"><strong>Use Cases</strong></td><td id="WqCP" class="" style="width:283.72454833984375px">Local version control and development</td><td id="POuH" class="" style="width:334.97222900390625px">Collaborative software development, open source</td></tr></tbody></table></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
